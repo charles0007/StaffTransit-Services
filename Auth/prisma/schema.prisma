@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model Users{
+  NativeId Int @default(autoincrement())
+  Id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  name String 
+  gender String?
+  phone String?
+  isAdmin Boolean @default(false)
+  isSuperAdmin Boolean @default(false)
+  isActive Boolean @default(true)
+  isDeleted Boolean @default(false) 
+  token String?
+  deviceToken String?
+  password String
+  oldpassword String?
+  image_name String?
+  image_path String?
+  bus_id String
+  organisation_id String
+  lat Decimal?
+  lng Decimal?
+  currentAddress String?
+  busStop String?
+  busStopLat Decimal?
+  busStopLng Decimal?
+
+  isOnline Boolean? @default(false)
+  shareLocation Boolean? @default(false)
+    notification  Boolean? @default(false)
+
+  bus Buses @relation(fields: [bus_id],references:[Id])
+  organisation Organisations @relation(fields: [organisation_id],references:[Id])
+
+
+}
+
+model Buses{
+  NativeId Int @default(autoincrement())
+  Id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  driver String?
+  email String?
+  phone String?
+  plateNumber String @unique
+  route String?
+  lat Decimal?
+  lng Decimal?
+  password String?
+  deviceToken String?
+  isOnline Boolean? @default(false)
+  currentAddress String?
+  shareLocation Boolean? @default(false)
+  isActive Boolean @default(true)
+  isDeleted Boolean @default(false)
+  organisation_id String
+  user Users[]
+  organisation Organisations @relation(fields: [organisation_id],references:[Id])
+
+  }
+
+model Organisations{
+  NativeId Int @default(autoincrement())
+  Id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @unique
+  website String @unique
+  password String?
+
+  isActive Boolean @default(true)
+  isDeleted Boolean @default(false)
+  address String?
+  city String?
+  state String?
+  openHr String?
+  openMin String?
+  closeHr String?  
+  closeMin String?  
+  lat Decimal?
+  lng Decimal?
+  
+  user Users[]
+  bus Buses[]
+}
+
+
+// npx prisma migrate dev --name init
+// prisma generate
+//npm install @prisma/client
+

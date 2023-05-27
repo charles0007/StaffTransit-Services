@@ -1,0 +1,15 @@
+node_modules
+/Auth/node_modules
+/Auth/.env
+/Auth/logs
+
+/General/node_modules
+/General/.env
+/General/logs
+
+/Users/node_modules
+/Users/.env
+/Users/logs
+
+/GMap/go.mod
+/GMap/go.sum

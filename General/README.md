@@ -13,7 +13,7 @@ The Microservice API project utilizes the following technologies:
 
 - Backend: Node.js with TypeScript
 - Messaging Queue: RabbitMQ
-
+ 
 ## Getting Started
 
 To run the Microservice API locally, follow these steps:

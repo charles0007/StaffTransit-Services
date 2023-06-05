@@ -37,7 +37,7 @@ async function startEventConsumer(details: consumerDetailsI) {
 
         // Process the message here
         // ...
-        // 
+
         // Acknowledge the message
         channel.ack(msg);
       }
